@@ -5,4 +5,5 @@ swaglib/modules.py
 swaglib.egg-info/PKG-INFO
 swaglib.egg-info/SOURCES.txt
 swaglib.egg-info/dependency_links.txt
+swaglib.egg-info/requires.txt
 swaglib.egg-info/top_level.txt

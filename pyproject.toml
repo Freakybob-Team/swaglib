@@ -1,9 +1,26 @@
-[tool.poetry]
-name = "swaglib"
-version = "0.1.3"
-description = "swaglib"
-authors = ["nomaakip <nomaakip@gmail.com>"]
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry.dependencies]
-python = "^3.13"
-requests = "^2.25.1"  # Ensure this is included
+[project]
+name = "swaglib"
+version = "0.1.4"
+description = "swaglib."
+authors = [
+    { name = "nomaakip", email = "nomaakip@gmail.com" }
+]
+dependencies = [
+    "requests", 
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.13"
+
+[project.urls]
+Homepage = "https://github.com/nomaakip/swaglib"
+Documentation = "https://github.com/nomaakip/swaglib"
+Repository = "https://github.com/nomaakip/swaglib"
+Issues = "https://github.com/nomaakip/swaglib/issues"
+
+[tool.setuptools]
+packages = ["swaglib"]
