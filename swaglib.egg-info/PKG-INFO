@@ -3,7 +3,7 @@ Name: swaglib
 Version: 0.1.7
 Summary: swaglib.
 Author-email: nomaakip <nomaakip@gmail.com>
-License: MIT
+License-Expression: MIT
 Project-URL: Homepage, https://github.com/Freakybob-Team/swaglib
 Project-URL: Documentation, https://github.com/Freakybob-Team/swaglib
 Project-URL: Repository, https://github.com/Freakybob-Team/swaglib
@@ -18,5 +18,7 @@ Dynamic: license-file
 
 ## install swaglib:
 ```pip install swaglib```
+or
+```pip install -e .``` (for dev builds, run in root folder)
 
-current examples in the examples folder: https://github.com/Freakybob-Team/swaglib
+current examples in the examples folder: https://github.com/Freakybob-Team/swaglib/tree/main/examples
