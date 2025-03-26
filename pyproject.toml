@@ -13,14 +13,14 @@ dependencies = [
     "requests", 
 ]
 readme = "README.md"
-license = { text = "MIT" }
+license = "MIT"
 requires-python = ">=3.13"
 
 [project.urls]
-Homepage = "https://github.com/nomaakip/swaglib"
-Documentation = "https://github.com/nomaakip/swaglib"
-Repository = "https://github.com/nomaakip/swaglib"
-Issues = "https://github.com/nomaakip/swaglib/issues"
+Homepage = "https://github.com/Freakybob-Team/swaglib"
+Documentation = "https://github.com/Freakybob-Team/swaglib"
+Repository = "https://github.com/Freakybob-Team/swaglib"
+Issues = "https://github.com/Freakybob-Team/swaglib/issues"
 
 [tool.setuptools]
 packages = ["swaglib"]

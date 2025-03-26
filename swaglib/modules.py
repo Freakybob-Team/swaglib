@@ -38,3 +38,6 @@ def createFile(file_name, file_extension):
     file = f"{file_name}.{file_extension}"
     with open(file, 'a') as file:
         return
+    
+def classic_greet(name):
+    print(f"Hello, {name}!")

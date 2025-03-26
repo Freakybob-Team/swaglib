@@ -4,10 +4,10 @@ Version: 0.1.7
 Summary: swaglib.
 Author-email: nomaakip <nomaakip@gmail.com>
 License: MIT
-Project-URL: Homepage, https://github.com/nomaakip/swaglib
-Project-URL: Documentation, https://github.com/nomaakip/swaglib
-Project-URL: Repository, https://github.com/nomaakip/swaglib
-Project-URL: Issues, https://github.com/nomaakip/swaglib/issues
+Project-URL: Homepage, https://github.com/Freakybob-Team/swaglib
+Project-URL: Documentation, https://github.com/Freakybob-Team/swaglib
+Project-URL: Repository, https://github.com/Freakybob-Team/swaglib
+Project-URL: Issues, https://github.com/Freakybob-Team/swaglib/issues
 Requires-Python: >=3.13
 Description-Content-Type: text/markdown
 License-File: LICENSE
@@ -19,4 +19,4 @@ Dynamic: license-file
 ## install swaglib:
 ```pip install swaglib```
 
-current examples in the examples folder: https://github.com/nomaakip/swaglib
+current examples in the examples folder: https://github.com/Freakybob-Team/swaglib
