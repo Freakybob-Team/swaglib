@@ -1,1 +1,1 @@
-from .modules import greet, fetchTextFromUrl, getResponseStatusFromUrl
+from .modules import *

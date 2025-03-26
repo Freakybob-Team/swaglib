@@ -1,4 +1,5 @@
 import requests
+import subprocess
 
 def greet(name):
     print(f"hello {name}!!")
@@ -11,3 +12,13 @@ def fetchTextFromUrl(url: str) -> str:
 def getResponseStatusFromUrl(url: str) -> str:
     response = requests.get(url)
     print(response.status_code)
+
+def playMp3(file_path: str) -> str:
+    subprocess.run(["ffplay", "-nodisp", "-autoexit", file_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+def checkWifi():
+    try:
+        requests.get("https://google.com", timeout=4)
+        return True
+    except requests.exceptions.RequestException:
+        return False 
