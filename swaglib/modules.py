@@ -22,3 +22,5 @@ def checkWifi():
         return True
     except requests.exceptions.RequestException:
         return False 
+def classic_greet(name):
+    print(f"Hello, {name}!")
