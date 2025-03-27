@@ -1,6 +1,7 @@
 import os
 import requests
 import subprocess
+import platform
 
 version = "0.1.9"
 
@@ -39,12 +40,53 @@ def createFile(file_name, file_extension):
     with open(file, 'a') as file:
         return
 
+def removeFile(file_path):
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
 def writeBytes(file_path, bytes_number, text):
     txt_string = (text * (bytes_number // len(text) + 1))[:bytes_number]
 
     mode = 'w' if not os.path.exists(file_path) else 'a'
     with open(file_path, mode) as file:
         file.write(txt_string)
+
+def getFileSize(file_path):
+    if os.path.exists(file_path):
+        return os.path.getsize(file_path)
+    return None
+
+def listFiles(directory):
+    return os.listdir(directory)
+
+def readFile(file):
+    if os.path.exists(file):
+        with open(file, 'r'):
+            return file.read()
+    return None
+
+def downloadFile(url, file_path):
+    response = requests.get(url)
+    with open(file_path, 'wb') as file:
+        file.write(response.content)
+
+def fileExists(file_path):
+    return os.path.exists(file_path)
+
+def shellRun(command):
+    
+    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+
+    if result.returncode != 0:
+        return f"Error: {result.stderr}"
+    return result.stdout
+
+def getSysInfo():
+    return {
+        "OS": platform.system(),
+        "Version": platform.version(),
+        "Architecture": platform.architecture()
+    }
 
 def classic_greet(name):
     print(f"Hello, {name}!")
