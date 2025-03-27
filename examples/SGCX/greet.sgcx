@@ -1,0 +1,4 @@
+import swaglib as sl 
+
+var name = "Squirrel"
+sl.greet(name)
