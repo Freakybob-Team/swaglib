@@ -1,23 +1,33 @@
 import os
 import requests
 import subprocess
+import json
+import base64
+import random
+import hashlib
+import platform
+import socket
+import datetime
 
-version = "0.1.9"
+version = "0.2.0"
 
 def greet(name):
     print(f"hello {name}!!")
 
+def classic_greet(name):
+    print(f"Hello, {name}!")
+
 def fetchTextFromUrl(url: str) -> str:
     response = requests.get(url)
-
     return response.text
 
-def getResponseStatusFromUrl(url: str) -> str:
+def getResponseStatusFromUrl(url: str) -> int:
     response = requests.get(url)
     return response.status_code
 
-def playAudio(file_path: str) -> str:
-    subprocess.run(["ffplay", "-nodisp", "-autoexit", file_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+def playAudio(file_path: str) -> None:
+    subprocess.run(["ffplay", "-nodisp", "-autoexit", file_path], 
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def checkWifi():
     try:
@@ -27,24 +37,66 @@ def checkWifi():
         return False 
 
 def writeToFile(path, content):
-    if not os.path.exists(path):
-        with open(path, 'w') as file:
-            file.write(content)
-    else:
-        with open(path, 'a') as file:
-            file.write(content)
+    mode = 'a' if os.path.exists(path) else 'w'
+    with open(path, mode) as file:
+        file.write(content)
 
 def createFile(file_name, file_extension):
-    file = f"{file_name}.{file_extension}"
-    with open(file, 'a') as file:
-        return
+    file_path = f"{file_name}.{file_extension}"
+    with open(file_path, 'w') as file:
+        pass
+    return file_path
 
 def writeBytes(file_path, bytes_number, text):
     txt_string = (text * (bytes_number // len(text) + 1))[:bytes_number]
-
     mode = 'w' if not os.path.exists(file_path) else 'a'
     with open(file_path, mode) as file:
         file.write(txt_string)
 
-def classic_greet(name):
-    print(f"Hello, {name}!")
+def get_system_info():
+    return {
+        'os': platform.system(),
+        'os_release': platform.release(),
+        'machine': platform.machine(),
+        'processor': platform.processor(),
+        'hostname': socket.gethostname(),
+        'ip_address': socket.gethostbyname(socket.gethostname())
+    }
+
+def generate_random_string(length=10):
+    characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    return ''.join(random.choice(characters) for _ in range(length))
+
+def encode_base64(text):
+    return base64.b64encode(text.encode()).decode()
+
+def decode_base64(encoded_text):
+    return base64.b64decode(encoded_text).decode()
+
+def hash_string(text, algorithm='sha256'):
+    if algorithm == 'md5':
+        return hashlib.md5(text.encode()).hexdigest()
+    elif algorithm == 'sha1':
+        return hashlib.sha1(text.encode()).hexdigest()
+    else:
+        return hashlib.sha256(text.encode()).hexdigest()
+
+def save_json(data, file_path):
+    with open(file_path, 'w') as file:
+        json.dump(data, file, indent=4)
+
+def load_json(file_path):
+    with open(file_path, 'r') as file:
+        return json.load(file)
+
+def get_current_timestamp():
+    return datetime.datetime.now().isoformat()
+
+def ping_host(host, count=4):
+    try:
+        param = '-n' if platform.system().lower() == 'windows' else '-c'
+        command = ['ping', param, str(count), host]
+        result = subprocess.run(command, capture_output=True, text=True)
+        return result.returncode == 0
+    except Exception:
+        return False
