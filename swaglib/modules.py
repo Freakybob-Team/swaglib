@@ -52,10 +52,6 @@ def removeFile(file_path):
     if os.path.exists(file_path):
         os.remove(file_path)
 
-def removeFile(file_path):
-    if os.path.exists(file_path):
-        os.remove(file_path)
-
 def writeBytes(file_path, bytes_number, text):
     txt_string = (text * (bytes_number // len(text) + 1))[:bytes_number]
     mode = 'w' if not os.path.exists(file_path) else 'a'
@@ -140,6 +136,3 @@ def shellRun(command):
     if result.returncode != 0:
         return f"Error: {result.stderr}"
     return result.stdout
-
-def classic_greet(name):
-    print(f"Hello, {name}!")
