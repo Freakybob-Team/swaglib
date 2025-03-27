@@ -2,7 +2,7 @@ import os
 import requests
 import subprocess
 
-version = "0.1.7"
+version = "0.1.8"
 
 def greet(name):
     print(f"hello {name}!!")
