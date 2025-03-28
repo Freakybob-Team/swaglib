@@ -9,8 +9,9 @@ import platform
 import socket
 import datetime
 import string
+import shutil
 
-version = "0.2.1"
+version = "0.2.2"
 
 def greet(name):
     print(f"hello {name}!!")
@@ -141,9 +142,37 @@ def fileExists(file_path):
     return os.path.exists(file_path)
 
 def shellRun(command):
-    
-    result = subprocess.run(command, shell=True, capture_output=True, text=True)
+    try:
+        result = subprocess.run(command, shell=True, capture_output=True, text=True)
+        result.check_returncode() 
+        return result.stdout
+    except subprocess.CalledProcessError as e:
+        return f"Error: {e.stderr}"
 
-    if result.returncode != 0:
-        return f"Error: {result.stderr}"
-    return result.stdout
+def makeDir(dir: str):
+    try:
+        os.makedirs(dir, exist_ok=True)
+    except Exception as e:
+        print(f"Error creating directory: {e}")
+    
+def removeDir(dir: str):
+    try:
+        shutil.rmtree(dir)
+    except Exception as e:
+        print(f"Error deleting directory: {e}")
+        
+def moveFile(file:str, dest:str):
+    try:
+        shutil.move(file, dest)
+    except Exception as e:
+        print(f"Error moving file: {e}")
+        
+def copyFile(file:str, dest:str):
+    try:
+        shutil.copy(file, dest)
+    except Exception as e:
+        print(f"Error copying file: {e}")
+        
+def getDiskInfo(path="/"):
+    total, free, used = shutil.disk_usage(path)
+    return {"total": total, "used": used, "free": free}

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "swaglib"
-version = "0.2.1"
+version = "0.2.2"
 description = "swaglib."
 authors = [
     { name = "nomaakip", email = "nomaakip@gmail.com" }
