@@ -10,7 +10,7 @@ import socket
 import datetime
 import string
 
-version = "0.2.0"
+version = "0.2.1"
 
 def greet(name):
     print(f"hello {name}!!")
@@ -19,16 +19,23 @@ def classic_greet(name):
     print(f"Hello, {name}!")
 
 def fetchTextFromUrl(url: str) -> str:
-    response = requests.get(url)
-    return response.text
+    try:
+        response = requests.get(url, timeout=5)
+        response.raise_for_status()  
+        return response.text
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching URL: {e}")
+        return None  
 
 def getResponseStatusFromUrl(url: str) -> int:
-    response = requests.get(url)
-    return response.status_code
+    try:
+        response = requests.get(url)
+        return response.status_code
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching URL: {e}")
 
 def playAudio(file_path: str) -> None:
-    subprocess.run(["ffplay", "-nodisp", "-autoexit", file_path], 
-                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run(["ffplay", "-nodisp", "-autoexit", file_path], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def checkWifi():
     try:
@@ -115,10 +122,14 @@ def getFileSize(file_path):
 def listFiles(directory):
     return os.listdir(directory)
 
-def readFile(file):
-    if os.path.exists(file):
-        with open(file, 'r') as file:
+def readFile(file_path):
+    try:
+        with open(file_path, 'r') as file:
             return file.read()
+    except FileNotFoundError:
+        print(f"Error: {file_path} not found.")
+    except IOError as e:
+        print(f"Error reading {file_path}: {e}")
     return None
 
 def downloadFile(url, file_path):
